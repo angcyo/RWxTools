@@ -1,9 +1,14 @@
 package com.angcyo.rwxtools.iview
 
-import android.view.LayoutInflater
+import android.os.Bundle
 import com.angcyo.rwxtools.R
-import com.angcyo.uidemo.layout.base.BaseContentUIView
-import com.angcyo.uiview.container.ContentLayout
+import com.angcyo.rwxtools.base.BaseItemUIView
+import com.angcyo.uiview.RCrashHandler
+import com.angcyo.uiview.accessibility.ASTip
+import com.angcyo.uiview.accessibility.BaseAccessibilityService
+import com.angcyo.uiview.base.Item
+import com.angcyo.uiview.base.SingleItem
+import com.angcyo.uiview.recycler.RBaseViewHolder
 
 /**
  * Copyright (C) 2016,深圳市红鸟网络科技股份有限公司 All rights reserved.
@@ -17,9 +22,37 @@ import com.angcyo.uiview.container.ContentLayout
  * Version: 1.0.0
  */
 
-class MainUIVIew : BaseContentUIView() {
-    override fun inflateContentLayout(baseContentLayout: ContentLayout?, inflater: LayoutInflater?) {
-        inflate(R.layout.activity_main)
+class MainUIVIew : BaseItemUIView() {
+    override fun createItems(items: MutableList<SingleItem>?) {
+        items?.add(object : SingleItem() {
+            override fun onBindView(holder: RBaseViewHolder, posInData: Int, dataBean: Item?) {
+                holder.click(R.id.setting_button) {
+                    BaseAccessibilityService.openAccessibilityActivity()
+                    if (!BaseAccessibilityService.isServiceEnabled()) {
+                        ASTip.show()
+                    }
+                }
+
+                holder.tv(R.id.text_view).text = "状态:${BaseAccessibilityService.isServiceEnabled()}"
+            }
+
+            override fun getItemLayoutId(): Int {
+                return R.layout.activity_main
+            }
+        })
     }
 
+    override fun getTitleString(): String {
+        return "R•Sen微信辅助工具"
+    }
+
+    override fun onViewShow(bundle: Bundle?) {
+        super.onViewShow(bundle)
+        mExBaseAdapter.notifyItemChanged(0)
+    }
+
+    override fun onViewShowFirst(bundle: Bundle?) {
+        super.onViewShowFirst(bundle)
+        RCrashHandler.checkCrash(mParentILayout)
+    }
 }

@@ -17,6 +17,33 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+
+        <!-- 无障碍服务和权限 -->
+        <service
+            android:name=".main.RAccessibilityService"
+            android:enabled="true"
+            android:exported="true"
+            android:label="@string/base_accessibility_summary"
+            android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE">
+            <intent-filter>
+                <action android:name="android.accessibilityservice.AccessibilityService"/>
+            </intent-filter>
+
+            <meta-data
+                android:name="android.accessibilityservice"
+                android:resource="@xml/base_accessibility_service"/>
+        </service>
+
+        <!--Android7.0 文件权限-->
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="com.angcyo.rwxtools"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths"/>
+        </provider>
     </application>
 
 </manifest>
