@@ -1,12 +1,12 @@
 package com.angcyo.rwxtools
 
-import android.support.v7.app.AppCompatActivity
-import android.os.Bundle
+import android.content.Intent
+import com.angcyo.rwxtools.iview.MainUIVIew
+import com.angcyo.uiview.base.UIBaseView
+import com.angcyo.uiview.base.UILayoutActivity
 
-class MainActivity : AppCompatActivity() {
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+class MainActivity : UILayoutActivity() {
+    override fun onLoadView(intent: Intent?) {
+        startIView(MainUIVIew().setEnableClipMode(UIBaseView.ClipMode.CLIP_START))
     }
 }
