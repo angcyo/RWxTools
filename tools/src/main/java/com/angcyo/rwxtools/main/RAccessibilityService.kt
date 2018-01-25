@@ -72,7 +72,7 @@ class RAccessibilityService : BaseAccessibilityService() {
             }
         }
 
-        val appInfo = CmdUtil.getAppInfo(applicationContext, event.packageName.toString())
+        val appInfo = CmdUtil.getAppInfo(applicationContext, event.packageName.toString()) ?: return
         filterLayout?.let {
             it.findViewById<ImageView>(R.id.image_view)?.let {
                 it.setImageDrawable(appInfo.appIcon)
