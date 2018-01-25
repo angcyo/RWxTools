@@ -6,6 +6,7 @@ import com.angcyo.rwxtools.base.BaseItemUIView
 import com.angcyo.uiview.RCrashHandler
 import com.angcyo.uiview.accessibility.ASTip
 import com.angcyo.uiview.accessibility.BaseAccessibilityService
+import com.angcyo.uiview.accessibility.permission.SettingsCompat
 import com.angcyo.uiview.base.Item
 import com.angcyo.uiview.base.SingleItem
 import com.angcyo.uiview.recycler.RBaseViewHolder
@@ -33,7 +34,22 @@ class MainUIVIew : BaseItemUIView() {
                     }
                 }
 
-                holder.tv(R.id.text_view).text = "状态:${BaseAccessibilityService.isServiceEnabled()}"
+                holder.tv(R.id.text_view).text = "状态:${BaseAccessibilityService.isServiceEnabled()}_${SettingsCompat.canDrawOverlays(mActivity)}"
+
+                holder.click(R.id.alert_button) {
+                    SettingsCompat.manageDrawOverlays(mActivity)
+
+//                    if (!SettingsCompat.canDrawOverlays(mActivity)) {
+//                        SettingsCompat.manageDrawOverlays(mActivity)
+//                    } else {
+//
+//                        RAlertTip().apply {
+//                            show(R.layout.alert_canvas_layout) {
+//                            }
+//
+//                        }
+//                    }
+                }
             }
 
             override fun getItemLayoutId(): Int {
@@ -54,5 +70,14 @@ class MainUIVIew : BaseItemUIView() {
     override fun onViewShowFirst(bundle: Bundle?) {
         super.onViewShowFirst(bundle)
         RCrashHandler.checkCrash(mParentILayout)
+
+//        RAlertTip().apply {
+//            needTouch = false
+//            show(R.layout.alert_layout) {
+//                it.findViewById<View>(R.id.button).setOnClickListener {
+//                    Tip.tip(System.nanoTime().toString())
+//                }
+//            }
+//        }
     }
 }
