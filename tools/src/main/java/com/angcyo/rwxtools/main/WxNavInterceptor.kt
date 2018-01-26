@@ -4,6 +4,7 @@ import android.graphics.Rect
 import android.view.accessibility.AccessibilityEvent
 import android.view.accessibility.AccessibilityNodeInfo
 import com.angcyo.library.utils.L
+import com.angcyo.uiview.Root
 import com.angcyo.uiview.accessibility.AccessibilityInterceptor
 import com.angcyo.uiview.accessibility.BaseAccessibilityService
 import com.angcyo.uiview.utils.ScreenUtil
@@ -54,6 +55,11 @@ open class WxNavInterceptor : AccessibilityInterceptor() {
                 "isInContact:${isInContact(rootNodeInfo)} " +
                 "isInFind:${isInFind(rootNodeInfo)} " +
                 "isInMe:${isInMe(rootNodeInfo)}")
+
+        try {
+            BaseAccessibilityService.logNodeInfo(rootNodeInfo, Root.createExternalFilePath("acc_log", "${rootNodeInfo.packageName}_${Root.createFileName()}"))
+        } catch (e: Exception) {
+        }
 
         if (!isInWxMainPager(rootNodeInfo)) {
             return

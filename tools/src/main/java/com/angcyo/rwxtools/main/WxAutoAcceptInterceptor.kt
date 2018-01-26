@@ -24,7 +24,7 @@ class WxAutoAcceptInterceptor : WxNavInterceptor() {
             val rootNodeInfo = BaseAccessibilityService.getRootNodeInfo(it)
 
             if (isInNewFriend(rootNodeInfo)) {
-                BaseAccessibilityService.removeInterceptor(this)
+                BaseAccessibilityService.clearInterceptor()
                 onJumpToTarget?.invoke()
                 Unit
             } else if (isInContact(rootNodeInfo)) {
