@@ -57,7 +57,7 @@ open class WxNavInterceptor : AccessibilityInterceptor() {
                 "isInMe:${isInMe(rootNodeInfo)}")
 
         try {
-            BaseAccessibilityService.logNodeInfo(rootNodeInfo, Root.createExternalFilePath("acc_log", "${rootNodeInfo.packageName}_${Root.createFileName()}"))
+            BaseAccessibilityService.logNodeInfo(rootNodeInfo, Root.createExternalFilePath("acc_log", "${rootNodeInfo.packageName}_${Root.createTimeFileName()}"))
         } catch (e: Exception) {
         }
 
