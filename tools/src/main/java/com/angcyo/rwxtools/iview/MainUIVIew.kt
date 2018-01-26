@@ -3,6 +3,9 @@ package com.angcyo.rwxtools.iview
 import android.os.Bundle
 import com.angcyo.rwxtools.R
 import com.angcyo.rwxtools.base.BaseItemUIView
+import com.angcyo.rwxtools.main.QQNavInterceptor
+import com.angcyo.rwxtools.main.WxAutoAcceptInterceptor
+import com.angcyo.rwxtools.main.WxNavInterceptor
 import com.angcyo.uiview.RCrashHandler
 import com.angcyo.uiview.accessibility.ASTip
 import com.angcyo.uiview.accessibility.BaseAccessibilityService
@@ -10,6 +13,7 @@ import com.angcyo.uiview.accessibility.permission.SettingsCompat
 import com.angcyo.uiview.base.Item
 import com.angcyo.uiview.base.SingleItem
 import com.angcyo.uiview.recycler.RBaseViewHolder
+import com.angcyo.uiview.utils.RUtils
 
 /**
  * Copyright (C) 2016,深圳市红鸟网络科技股份有限公司 All rights reserved.
@@ -37,7 +41,12 @@ class MainUIVIew : BaseItemUIView() {
                 holder.tv(R.id.text_view).text = "状态:${BaseAccessibilityService.isServiceEnabled()}_${SettingsCompat.canDrawOverlays(mActivity)}"
 
                 holder.click(R.id.alert_button) {
-                    SettingsCompat.manageDrawOverlays(mActivity)
+                    try {
+                        SettingsCompat.manageDrawOverlays(mActivity)
+                    } catch (e: Exception) {
+                        //Tip.tip("没有找到对应的程序.")
+                        RUtils.openAppDetailView(mActivity)
+                    }
 
 //                    if (!SettingsCompat.canDrawOverlays(mActivity)) {
 //                        SettingsCompat.manageDrawOverlays(mActivity)
@@ -49,6 +58,23 @@ class MainUIVIew : BaseItemUIView() {
 //
 //                        }
 //                    }
+                }
+
+                holder.click(R.id.open_wx_button) {
+                    RUtils.startApp("com.tencent.mm")
+                    BaseAccessibilityService.addInterceptor(WxNavInterceptor().apply {
+                        target = WxNavInterceptor.NAV_CONTACT
+                        onJumpToTarget = {
+                            BaseAccessibilityService.clearInterceptor()
+                            BaseAccessibilityService.addInterceptor(WxAutoAcceptInterceptor())
+                        }
+                    })
+                }
+                holder.click(R.id.open_qq_button) {
+                    RUtils.startApp("com.tencent.mobileqq")
+                    BaseAccessibilityService.addInterceptor(QQNavInterceptor().apply {
+                        target = QQNavInterceptor.NAV_DYNAMIC
+                    })
                 }
             }
 

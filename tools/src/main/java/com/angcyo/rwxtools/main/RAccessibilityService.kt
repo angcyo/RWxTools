@@ -83,10 +83,10 @@ class RAccessibilityService : BaseAccessibilityService() {
             it.findViewById<View>(R.id.add_button)?.setOnClickListener {
                 //Tip.tip(appInfo.appName)
 
-                serviceInfo?.let {
-                    it.packageNames = arrayOf(appInfo.packageName)
-                    serviceInfo = it
-                }
+//                serviceInfo?.let {
+//                    it.packageNames = arrayOf(appInfo.packageName)
+//                    serviceInfo = it
+//                }
 
                 filterAlertTip?.hide()
                 //filterLayout = null
@@ -113,10 +113,10 @@ class RAccessibilityService : BaseAccessibilityService() {
                     it.getBoundsInScreen(outBoundsRect)
                     cLayout.addShape(RectShape().apply {
                         drawRect.set(outBoundsRect)
-                        drawText = it.text?.toString() ?: ""
-                        drawTextColor = Color.RED
-                        textDrawX = outBoundsRect.left.toFloat()
-                        textDrawY = outBoundsRect.top.toFloat()
+                        drawRectColor = if (it.text?.isEmpty() != false) Color.WHITE else Color.RED
+//                        drawTextColor = Color.RED
+//                        textDrawX = outBoundsRect.left.toFloat()
+//                        textDrawY = outBoundsRect.top.toFloat()
                     })
                     showCanvasDebug(it)
                 }

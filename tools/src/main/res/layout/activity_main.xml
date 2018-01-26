@@ -36,6 +36,23 @@
             android:layout_marginTop="@dimen/base_xhdpi"
             android:text="打开浮窗权限"/>
 
+        <com.angcyo.uiview.widget.Button
+            android:id="@+id/open_qq_button"
+            style="@style/BaseSkinButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/base_xhdpi"
+            android:text="打开QQ"/>
+
+
+        <com.angcyo.uiview.widget.Button
+            android:id="@+id/open_wx_button"
+            style="@style/BaseSkinButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/base_xhdpi"
+            android:text="打开微信"/>
+
 
     </LinearLayout>
 </FrameLayout>
