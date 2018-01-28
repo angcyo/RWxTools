@@ -9,7 +9,7 @@ import com.angcyo.uiview.base.UILayoutActivity
 class MainActivity : UILayoutActivity() {
     override fun onLoadView(intent: Intent?) {
         checkPermissions()
-        startIView(MainUIVIew().setEnableClipMode(UIBaseView.ClipMode.CLIP_START))
+        startIView(MainUIVIew().setEnableClipMode(UIBaseView.ClipMode.CLIP_START), false)
     }
 
     override fun needPermissions(): Array<String> {
@@ -17,7 +17,10 @@ class MainActivity : UILayoutActivity() {
     }
 
     override fun onUIBackPressed() {
-        //super.onUIBackPressed()
-        moveTaskToBack()
+        if (BuildConfig.DEBUG) {
+            super.onUIBackPressed()
+        } else {
+            moveTaskToBack()
+        }
     }
 }

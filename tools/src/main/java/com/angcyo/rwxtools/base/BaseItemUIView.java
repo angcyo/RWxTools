@@ -1,5 +1,7 @@
 package com.angcyo.rwxtools.base;
 
+import android.os.Bundle;
+
 import com.angcyo.uiview.base.SingleItem;
 import com.angcyo.uiview.base.UIItemUIView;
 import com.angcyo.uiview.model.TitleBarPattern;
@@ -25,5 +27,11 @@ public abstract class BaseItemUIView extends UIItemUIView<SingleItem> {
     @Override
     public int getDefaultBackgroundColor() {
         return super.getDefaultBackgroundColor();
+    }
+
+    @Override
+    public void onViewShow(Bundle bundle) {
+        super.onViewShow(bundle);
+        lightStatusBar(false);
     }
 }
