@@ -1,2 +1,13 @@
 include ':tools'
-include ':RLibrary:uiview', ':RLibrary:library', ':RLibrary:rcode', ':RLibrary:github'
+
+include ':RLibrary:uiview'
+include ':RLibrary:library'
+include ':RLibrary:github'
+
+include ':RLibrary:rcode'
+include ':RLibrary:zxingzbar'
+
+//include ':RLibrary:websocket'
+//include ':RLibrary:filedownloader'
+//include ':RLibrary:imagepicker'
+include ':RLibrary:ucrop'
